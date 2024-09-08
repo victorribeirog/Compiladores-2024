@@ -49,6 +49,6 @@ F                   printf("%11s: cte:falso\n", yytext);
 
 int yywrap() {return 1;}
 int main(){
-    yylex;
+    yylex();
     return 0;
 }
