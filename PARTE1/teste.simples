@@ -1,9 +1,0 @@
-programa exemplo
-    inteiro x
-inicio
-    x <- 10
-    enquanto x > 0 faca
-        escreva x
-        x <- x - 1
-    fimenquanto
-fimprograma

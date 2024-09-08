@@ -16,7 +16,7 @@ fimse               printf("%11s: reservado\n", yytext);
 enquanto            printf("%11s: reservado\n", yytext);
 faca                printf("%11s: reservado\n", yytext);
 fimenquanto         printf("%11s: reservado\n", yytext);
-%%
+
 
 "+"                 printf("%11s: op.soma\n", yytext);
 "-"                 printf("%11s: op.subtracao\n", yytext);
@@ -50,4 +50,5 @@ F                   printf("%11s: cte:falso\n", yytext);
 int yywrap() {return 1;}
 int main(){
     yylex;
+    return 0;
 }
