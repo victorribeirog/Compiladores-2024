@@ -1,0 +1,113 @@
+Grammar
+
+    0 $accept: S $end
+
+    1 S: '[' L ']'
+    2  | 'a'
+
+    3 L: S
+    4  | L ',' S
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    ',' (44) 4
+    '[' (91) 1
+    ']' (93) 1
+    'a' (97) 2
+    error (256)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (7)
+        on left: 0
+    S (8)
+        on left: 1 2
+        on right: 0 3 4
+    L (9)
+        on left: 3 4
+        on right: 1 4
+
+
+State 0
+
+    0 $accept: • S $end
+
+    '['  shift, and go to state 1
+    'a'  shift, and go to state 2
+
+    S  go to state 3
+
+
+State 1
+
+    1 S: '[' • L ']'
+
+    '['  shift, and go to state 1
+    'a'  shift, and go to state 2
+
+    S  go to state 4
+    L  go to state 5
+
+
+State 2
+
+    2 S: 'a' •
+
+    $default  reduce using rule 2 (S)
+
+
+State 3
+
+    0 $accept: S • $end
+
+    $end  shift, and go to state 6
+
+
+State 4
+
+    3 L: S •
+
+    $default  reduce using rule 3 (L)
+
+
+State 5
+
+    1 S: '[' L • ']'
+    4 L: L • ',' S
+
+    ']'  shift, and go to state 7
+    ','  shift, and go to state 8
+
+
+State 6
+
+    0 $accept: S $end •
+
+    $default  accept
+
+
+State 7
+
+    1 S: '[' L ']' •
+
+    $default  reduce using rule 1 (S)
+
+
+State 8
+
+    4 L: L ',' • S
+
+    '['  shift, and go to state 1
+    'a'  shift, and go to state 2
+
+    S  go to state 9
+
+
+State 9
+
+    4 L: L ',' S •
+
+    $default  reduce using rule 4 (L)
