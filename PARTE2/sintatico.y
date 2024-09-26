@@ -106,5 +106,14 @@ expressao
     | expressao T_OU expressao
     | termo
     ;
+
+termo
+    : T_NUMERO
+    | T_IDENTIF
+    | T_V
+    | T_F
+    | T_NAO termo
+    | T_ABRE expressao T_FECHA
+    ;
 %%
 
