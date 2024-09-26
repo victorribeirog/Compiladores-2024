@@ -59,7 +59,11 @@ extern int yydebug;
     MAIS = 260,                    /* MAIS  */
     MENOS = 261,                   /* MENOS  */
     DIV = 262,                     /* DIV  */
-    ENTER = 263                    /* ENTER  */
+    ENTER = 263,                   /* ENTER  */
+    ABRE = 264,                    /* ABRE  */
+    FECHA = 265,                   /* FECHA  */
+    VAR = 266,                     /* VAR  */
+    RECEBE = 267                   /* RECEBE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif

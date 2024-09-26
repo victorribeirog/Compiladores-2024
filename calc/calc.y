@@ -1,7 +1,8 @@
 %{
     #include <stdio.h>
     int yylex();
-    void yyerror(char *);    
+    void yyerror(char *);
+    int valores[26];    
 %}
 %token NUM
 %token VEZES
@@ -9,15 +10,31 @@
 %token MENOS
 %token DIV
 %token ENTER
+%token ABRE
+%token FECHA
+%token VAR
+%token RECEBE
+
+//precedencia e associatividade das operacoes
+%left MAIS MENOS
+%left VEZES DIV
+
 
 %%
-linha : linha expr ENTER        { printf("\n"); }
+linha : linha comando ENTER        
       | ;
-expr  : NUM                     { printf("%d ", $1); }
-      | expr MAIS expr          { printf("+"); }
-      | expr MENOS expr         { printf("-"); }
-      | expr VEZES expr         { printf("*"); }
-      | expr DIV expr           { printf("/"); }
+
+comando : expr                  { printf("%d\n", $1); }
+        | VAR RECEBE expr       { valores[$1] = $3; }
+        ;
+
+expr  : NUM                     { $$ = $1; }
+      | VAR                     { $$ = valores[$1]; }
+      | expr MAIS expr          { $$ = $1 + $3; }
+      | expr MENOS expr         { $$ = $1 - $3; }
+      | expr VEZES expr         { $$ = $1 * $3; }
+      | expr DIV expr           { $$ = $1 / $3; }
+      | ABRE expr FECHA         { $$ = $2; }
       ;
 %%
 
