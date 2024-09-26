@@ -43,7 +43,7 @@ cabecalho
 
 variaveis
     : 
-    | declaracao variaveis
+    | declaracao_variaveis
     ;
 
 declaracao_variaveis
