@@ -1,3 +1,14 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "lexico.c"
+%}
+
+
+
+
 %token T_PROGRAMA
 %token T_INICIO
 %token T_FIMPROG
@@ -116,4 +127,10 @@ termo
     | T_ABRE expressao T_FECHA
     ;
 %%
+
+int main (){
+    yyparse();
+    puts("Programa ok!");
+    return 0;
+}
 

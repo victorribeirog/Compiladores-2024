@@ -1,11 +1,13 @@
 %{
 #include "sintatico.h"
 char atomo[100];
+int numLinha = 1;
+int yyerror(char *);
 }%
 
 identificador   [a-zA-Z]([a-zA-Z0-9])*
 numero          [0-9]*
-espaco          [\t\r]*
+espaco          [ \t\r]*
 novalinha       [\n]
 
 %%
@@ -21,7 +23,6 @@ fimse               {return T_FIMSE; }
 enquanto            {return T_ENQUANTO; }
 faca                {return T_FACA; }
 fimenquanto         {return T_FIMENQTO; }
-
 
 "+"                 {return T_MAIS; }
 "-"                 {return T_MENOS; }
@@ -48,12 +49,14 @@ F                   {return T_F; }
 {identificador}     {strcpy (atomo, yytext); return T_IDENTIF; }
 {numero}            {strcpy (atomo, yytext); return T_NUMERO; }
 {espaco}            /*nada*/
-{novalinha}         /*nada*/
+{novalinha}         numLinha++;
 
+.                   yyerror("lexico - símbolo desconhecido!");
 %%
 
 int yywrap() {return 1;}
-int main(){
-    yylex();
-    return 0;
+int yyerror(char *s){
+    printf("Erro na linha %d: %s\n", numLinha, s);
+    exit(100);
 }
+
