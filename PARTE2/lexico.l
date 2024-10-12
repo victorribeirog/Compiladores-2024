@@ -3,7 +3,7 @@
 char atomo[100];
 int numLinha = 1;
 int yyerror(char *);
-}%
+%}
 
 identificador   [a-zA-Z]([a-zA-Z0-9])*
 numero          [0-9]*

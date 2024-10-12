@@ -20,7 +20,7 @@
 %token T_FIMSE
 %token T_ENQUANTO
 %token T_FACA
-%token T_FIMENQT
+%token T_FIMENQTO
 %token T_MAIS
 %token T_MENOS
 %token T_VEZES
@@ -94,7 +94,7 @@ escrita
     ;
 
 repeticao
-    : T_ENQUANTO expressao T_FACA lista_comandos T_FIMENQT
+    : T_ENQUANTO expressao T_FACA lista_comandos T_FIMENQTO
     ;
 
 selecao
