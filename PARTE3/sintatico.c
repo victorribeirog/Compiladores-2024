@@ -547,11 +547,11 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    55,    55,    60,    54,    66,    70,    71,    75,    76,
-      80,    81,    85,    93,   104,   105,   109,   110,   111,   112,
-     113,   117,   126,   131,   135,   139,   143,   144,   145,   146,
-     147,   148,   149,   150,   151,   152,   156,   157,   162,   163,
-     164,   165
+       0,    55,    55,    60,    54,    72,    76,    77,    81,    82,
+      86,    87,    91,    99,   110,   111,   115,   116,   117,   118,
+     119,   123,   132,   137,   141,   145,   149,   150,   151,   152,
+     153,   154,   155,   156,   157,   158,   162,   163,   168,   169,
+     170,   171
 };
 #endif
 
@@ -1182,30 +1182,36 @@ yyreduce:
 
   case 3: /* $@2: %empty  */
 #line 60 "sintatico.y"
-        { printf("\tAMEM\t%d\n", contaVar); }
-#line 1187 "sintatico.c"
+        { 
+            printf("\tAMEM\t%d\n", contaVar); 
+            empilha(contaVar);
+        }
+#line 1190 "sintatico.c"
     break;
 
   case 4: /* programa: cabecalho $@1 variaveis $@2 T_INICIO lista_comandos T_FIMPROG  */
-#line 62 "sintatico.y"
-        { printf("\tDMEM\t%d\n\tFIMP\n", contaVar); }
-#line 1193 "sintatico.c"
-    break;
-
-  case 10: /* tipo: T_INTEIRO  */
-#line 80 "sintatico.y"
-                { tipo = INT; }
+#line 65 "sintatico.y"
+        { 
+            int conta = desempilha();
+            printf("\tDMEM\t%d\n\tFIMP\n", conta); 
+        }
 #line 1199 "sintatico.c"
     break;
 
-  case 11: /* tipo: T_LOGICO  */
-#line 81 "sintatico.y"
-                { tipo = LOG; }
+  case 10: /* tipo: T_INTEIRO  */
+#line 86 "sintatico.y"
+                { tipo = INT; }
 #line 1205 "sintatico.c"
     break;
 
+  case 11: /* tipo: T_LOGICO  */
+#line 87 "sintatico.y"
+                { tipo = LOG; }
+#line 1211 "sintatico.c"
+    break;
+
   case 12: /* lista_variaveis: lista_variaveis T_IDENTIF  */
-#line 86 "sintatico.y"
+#line 92 "sintatico.y"
         {
             strcpy (elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -1213,11 +1219,11 @@ yyreduce:
             insereSimbolo(elemTab);
             contaVar++; 
         }
-#line 1217 "sintatico.c"
+#line 1223 "sintatico.c"
     break;
 
   case 13: /* lista_variaveis: T_IDENTIF  */
-#line 94 "sintatico.y"
+#line 100 "sintatico.y"
         {
             strcpy (elemTab.id, atomo);
             elemTab.end = contaVar;
@@ -1225,114 +1231,114 @@ yyreduce:
             insereSimbolo(elemTab);
             contaVar++; 
         }
-#line 1229 "sintatico.c"
+#line 1235 "sintatico.c"
     break;
 
   case 21: /* leitura: T_LEIA T_IDENTIF  */
-#line 118 "sintatico.y"
+#line 124 "sintatico.y"
         { 
             int pos = buscaSimbolo(atomo);
             printf("\tLEIA\n");
             printf("\tARZG\t%d\n", tabSimb[pos].end); 
         }
-#line 1239 "sintatico.c"
-    break;
-
-  case 22: /* escrita: T_ESCREVA expressao  */
-#line 127 "sintatico.y"
-        { printf("\tESCR\n"); }
 #line 1245 "sintatico.c"
     break;
 
-  case 26: /* expressao: expressao T_MAIS expressao  */
-#line 143 "sintatico.y"
-                                    { printf("\tSOMA\n");}
+  case 22: /* escrita: T_ESCREVA expressao  */
+#line 133 "sintatico.y"
+        { printf("\tESCR\n"); }
 #line 1251 "sintatico.c"
     break;
 
-  case 27: /* expressao: expressao T_MENOS expressao  */
-#line 144 "sintatico.y"
-                                    { printf("\tSUBT\n");}
+  case 26: /* expressao: expressao T_MAIS expressao  */
+#line 149 "sintatico.y"
+                                    { printf("\tSOMA\n");}
 #line 1257 "sintatico.c"
     break;
 
-  case 28: /* expressao: expressao T_VEZES expressao  */
-#line 145 "sintatico.y"
-                                    { printf("\tMULT\n");}
+  case 27: /* expressao: expressao T_MENOS expressao  */
+#line 150 "sintatico.y"
+                                    { printf("\tSUBT\n");}
 #line 1263 "sintatico.c"
     break;
 
-  case 29: /* expressao: expressao T_DIV expressao  */
-#line 146 "sintatico.y"
-                                    { printf("\tDIVI\n");}
+  case 28: /* expressao: expressao T_VEZES expressao  */
+#line 151 "sintatico.y"
+                                    { printf("\tMULT\n");}
 #line 1269 "sintatico.c"
     break;
 
-  case 30: /* expressao: expressao T_MAIOR expressao  */
-#line 147 "sintatico.y"
-                                    { printf("\tCMMA\n");}
+  case 29: /* expressao: expressao T_DIV expressao  */
+#line 152 "sintatico.y"
+                                    { printf("\tDIVI\n");}
 #line 1275 "sintatico.c"
     break;
 
-  case 31: /* expressao: expressao T_MENOR expressao  */
-#line 148 "sintatico.y"
-                                    { printf("\tCMME\n");}
+  case 30: /* expressao: expressao T_MAIOR expressao  */
+#line 153 "sintatico.y"
+                                    { printf("\tCMMA\n");}
 #line 1281 "sintatico.c"
     break;
 
-  case 32: /* expressao: expressao T_IGUAL expressao  */
-#line 149 "sintatico.y"
-                                    { printf("\tCMIG\n");}
+  case 31: /* expressao: expressao T_MENOR expressao  */
+#line 154 "sintatico.y"
+                                    { printf("\tCMME\n");}
 #line 1287 "sintatico.c"
     break;
 
-  case 33: /* expressao: expressao T_E expressao  */
-#line 150 "sintatico.y"
-                                    { printf("\tCONJ\n");}
+  case 32: /* expressao: expressao T_IGUAL expressao  */
+#line 155 "sintatico.y"
+                                    { printf("\tCMIG\n");}
 #line 1293 "sintatico.c"
     break;
 
-  case 34: /* expressao: expressao T_OU expressao  */
-#line 151 "sintatico.y"
-                                    { printf("\tDISJ\n");}
+  case 33: /* expressao: expressao T_E expressao  */
+#line 156 "sintatico.y"
+                                    { printf("\tCONJ\n");}
 #line 1299 "sintatico.c"
     break;
 
-  case 36: /* termo: T_NUMERO  */
-#line 156 "sintatico.y"
-                    { printf("\tCRCT\t%s\n", atomo);}
+  case 34: /* expressao: expressao T_OU expressao  */
+#line 157 "sintatico.y"
+                                    { printf("\tDISJ\n");}
 #line 1305 "sintatico.c"
     break;
 
+  case 36: /* termo: T_NUMERO  */
+#line 162 "sintatico.y"
+                    { printf("\tCRCT\t%s\n", atomo);}
+#line 1311 "sintatico.c"
+    break;
+
   case 37: /* termo: T_IDENTIF  */
-#line 158 "sintatico.y"
+#line 164 "sintatico.y"
         { 
             int pos = buscaSimbolo(atomo);
             printf("\tCRVG\t%d\n", tabSimb[pos].end);
         }
-#line 1314 "sintatico.c"
-    break;
-
-  case 38: /* termo: T_V  */
-#line 162 "sintatico.y"
-                    { printf("\tCRCT\t1\n");}
 #line 1320 "sintatico.c"
     break;
 
-  case 39: /* termo: T_F  */
-#line 163 "sintatico.y"
-                    { printf("\tCRCT\t0\n");}
+  case 38: /* termo: T_V  */
+#line 168 "sintatico.y"
+                    { printf("\tCRCT\t1\n");}
 #line 1326 "sintatico.c"
     break;
 
-  case 40: /* termo: T_NAO termo  */
-#line 164 "sintatico.y"
-                    { printf("\tNEGA\n");}
+  case 39: /* termo: T_F  */
+#line 169 "sintatico.y"
+                    { printf("\tCRCT\t0\n");}
 #line 1332 "sintatico.c"
     break;
 
+  case 40: /* termo: T_NAO termo  */
+#line 170 "sintatico.y"
+                    { printf("\tNEGA\n");}
+#line 1338 "sintatico.c"
+    break;
 
-#line 1336 "sintatico.c"
+
+#line 1342 "sintatico.c"
 
       default: break;
     }
@@ -1525,7 +1531,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 167 "sintatico.y"
+#line 173 "sintatico.y"
 
 
 int main (){
