@@ -57,9 +57,15 @@ programa
             contaVar = 0; 
         }
       variaveis
-        { printf("\tAMEM\t%d\n", contaVar); } 
+        { 
+            printf("\tAMEM\t%d\n", contaVar); 
+            empilha(contaVar);
+        } 
       T_INICIO lista_comandos T_FIMPROG
-        { printf("\tDMEM\t%d\n\tFIMP\n", contaVar); }
+        { 
+            int conta = desempilha();
+            printf("\tDMEM\t%d\n\tFIMP\n", conta); 
+        }
     ;
 
 cabecalho
