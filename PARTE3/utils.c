@@ -65,3 +65,13 @@ int desempilha(void)
         yyerror("Pilha semantica vazia!");
     return pilha[topo--];
 }
+
+// tipo1 etipo2 são os tipos experados na expressão
+// ret é o tipo que será empilhado com resultado da expressão
+void testaTipo(int tipo1, int tipo2, int ret){
+    int t1 = desempilha();
+    int t2 = desempilha();
+    if(t1 != tipo1 || t2 != tipo2)
+        yyerror("Incompatibilidade de tipo");
+    empilha(ret);
+}
